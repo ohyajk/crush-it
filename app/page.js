@@ -161,8 +161,8 @@ export const Home = () => {
                             <button data-testid='decrement-month-button' onClick={decrementMonth} className='border border-indigo-400 p-1.5 rounded-md mr-1'>
                                 <div className='rounded-full bg-indigo-400 text-indigo-100 text-s'>&ensp;&lt;&ensp;</div>
                             </button>
-                            <button data-testid='monthID' className='border border-indigo-400 w-40 p-1.5 pl-3 rounded-md font-semibold text-s text-left'>
-                                <select className='text-black' value={selectedMonth} onChange={(e) => setSelectedMonth(e.target.value)}>
+                            <button data-testid='monthID' className='border border-indigo-400 w-40 p-1.5 pl-3 rounded-md font-semibold text-s text-left '>
+                                <select className='text-black bg-inherit  w-full outline-none pl-2 ' value={selectedMonth} onChange={(e) => setSelectedMonth(e.target.value)}>
                                     {myMonths.map((month) => {
                                         return (
                                             <option key={month} value={month}>
@@ -181,7 +181,7 @@ export const Home = () => {
                                 <div className='rounded-full bg-indigo-400 text-indigo-100 text-s'>&ensp;&lt;&ensp;</div>
                             </button>
                             <button data-testid='dayID' className='border border-indigo-400 w-16 p-1.5 pl-3 rounded-md font-semibold text-s text-left'>
-                                <select className='text-black' value={currentDay} onChange={(e) => setCurrentDay(e.target.value)}>
+                                <select className='text-black bg-inherit  w-full outline-none pl-1' value={currentDay} onChange={(e) => setCurrentDay(e.target.value)}>
                                     {days.map((day) => {
                                         return (
                                             <option key={day} value={day}>
@@ -200,7 +200,7 @@ export const Home = () => {
                                 <div className='rounded-full bg-indigo-400 text-indigo-100 text-s'>&ensp;&lt;&ensp;</div>
                             </button>
                             <button data-testid='yearID' className='border border-indigo-400 w-28 p-1.5 pl-3 rounded-md font-semibold text-s text-left'>
-                                <select className='text-black' value={selectedYear} onChange={(e) => setSelectedYear(e.target.value)}>
+                                <select className='text-black bg-inherit  w-full outline-none pl-2 ' value={selectedYear} onChange={(e) => setSelectedYear(e.target.value)}>
                                     {allYears.map((year) => {
                                         return (
                                             <option key={year} value={year}>

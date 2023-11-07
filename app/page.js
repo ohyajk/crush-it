@@ -33,6 +33,9 @@ export const Home = () => {
     useEffect(() => {
         const daysInCurrentMonth = moment(`${selectedYear}-${selectedMonth}`, "YYYY-MMMM").daysInMonth()
         setDaysInMonth(daysInCurrentMonth)
+        if (currentDay > daysInCurrentMonth) {
+            setCurrentDay(daysInCurrentMonth)
+        }
     }, [selectedMonth, selectedYear])
 
     console.log(dateNumeric)
@@ -47,6 +50,10 @@ export const Home = () => {
         setSelectedYear(previousMonth.year())
         setSelectedMonth(moment().month(previousMonth.month()).format("MMMM"))
 
+        const daysInNewMonth = moment(`${selectedYear}-${selectedMonthIndex}`).daysInMonth()
+        if (currentDay > daysInNewMonth) {
+            setCurrentDay(daysInNewMonth)
+        }
         return moment().month(previousMonth.month()).format("MMMM")
     }
 
@@ -60,6 +67,10 @@ export const Home = () => {
         setSelectedYear(previousMonth.year())
         setSelectedMonth(moment().month(previousMonth.month()).format("MMMM"))
 
+        const daysInNewMonth = moment(`${selectedYear}-${selectedMonthIndex + 2}`).daysInMonth()
+        if (currentDay > daysInNewMonth) {
+            setCurrentDay(daysInNewMonth)
+        }
         return moment().month(previousMonth.month()).format("MMMM")
     }
 

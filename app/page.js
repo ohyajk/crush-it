@@ -12,19 +12,17 @@ export const Home = () => {
     const myDay = moment().format("D")
     const myMonths = moment.months()
     const myYear = moment().year()
-    const lastYear = myYear + 50
-    const firstYear = myYear - 50
-
-    const allYears = []
-    for (let year = firstYear; year <= lastYear; year++) {
-        allYears.push(year)
-    }
 
     const [selectedMonth, setSelectedMonth] = useState(currentMonth)
     const [selectedYear, setSelectedYear] = useState(myYear)
     const [daysInMonth, setDaysInMonth] = useState([])
     const [currentDay, setCurrentDay] = useState(myDay)
     const dateNumeric = `${moment().month(selectedMonth).month() + 1}-${currentDay}-${selectedYear}`
+
+    const allYears = []
+    for (let year = 2000; year <= 2050; year++) {
+        allYears.push(year)
+    }
     const days = []
     for (let day = 1; day <= daysInMonth; day++) {
         days.push(day)
@@ -42,14 +40,10 @@ export const Home = () => {
 
     function decrementMonth() {
         const selectedMonthIndex = moment().month(selectedMonth).month()
-
         const currentMoment = moment(`${selectedYear}-${selectedMonthIndex + 1}`, "YYYY-M")
-
         const previousMonth = currentMoment.subtract(1, "months")
-
         setSelectedYear(previousMonth.year())
         setSelectedMonth(moment().month(previousMonth.month()).format("MMMM"))
-
         const daysInNewMonth = moment(`${selectedYear}-${selectedMonthIndex}`).daysInMonth()
         if (currentDay > daysInNewMonth) {
             setCurrentDay(daysInNewMonth)
@@ -59,14 +53,10 @@ export const Home = () => {
 
     function incrementMonth() {
         const selectedMonthIndex = moment().month(selectedMonth).month()
-
         const currentMoment = moment(`${selectedYear}-${selectedMonthIndex + 1}`, "YYYY-M")
-
         const previousMonth = currentMoment.add(1, "months")
-
         setSelectedYear(previousMonth.year())
         setSelectedMonth(moment().month(previousMonth.month()).format("MMMM"))
-
         const daysInNewMonth = moment(`${selectedYear}-${selectedMonthIndex + 2}`).daysInMonth()
         if (currentDay > daysInNewMonth) {
             setCurrentDay(daysInNewMonth)
@@ -76,19 +66,15 @@ export const Home = () => {
 
     function incrementDay() {
         const selectedMonthIndex = moment().month(selectedMonth).month()
-
         const currentMoment = moment(`${selectedYear}-${selectedMonthIndex + 1}-${currentDay}`, "YYYY-M-D")
         const nextDay = currentMoment.add(1, "days")
         const nextDayOfMonth = nextDay.date()
-
         let newMonth = selectedMonth
         let newYear = selectedYear
-
         if (nextDay.month() !== selectedMonthIndex) {
             newMonth = moment().month(nextDay.month()).format("MMMM")
             newYear = nextDay.year()
         }
-
         setCurrentDay(nextDayOfMonth)
         setSelectedMonth(newMonth)
         setSelectedYear(newYear)
@@ -96,19 +82,15 @@ export const Home = () => {
 
     function decrementDay() {
         const selectedMonthIndex = moment().month(selectedMonth).month()
-
         const currentMoment = moment(`${selectedYear}-${selectedMonthIndex + 1}-${currentDay}`, "YYYY-M-D")
         const prevDay = currentMoment.subtract(1, "days")
         const prevDayOfMonth = prevDay.date()
-
         let newMonth = selectedMonth
         let newYear = selectedYear
-
         if (prevDay.month() !== selectedMonthIndex) {
             newMonth = moment().month(prevDay.month()).format("MMMM")
             newYear = prevDay.year()
         }
-
         setCurrentDay(prevDayOfMonth)
         setSelectedMonth(newMonth)
         setSelectedYear(newYear)
@@ -116,18 +98,18 @@ export const Home = () => {
 
     function decrementYear() {
         const currentMoment = moment(`${selectedYear}`, "YYYY")
-
         const previousYear = currentMoment.subtract(1, "year")
-
-        setSelectedYear(previousYear.year())
+        if (previousYear.year() > 2000) {
+            setSelectedYear(previousYear.year())
+        }
     }
 
     function incrementYear() {
         const currentMoment = moment(`${selectedYear}`, "YYYY")
-
         const previousYear = currentMoment.add(1, "year")
-
-        setSelectedYear(previousYear.year())
+        if (previousYear.year() <= 2050) {
+            setSelectedYear(previousYear.year())
+        }
     }
 
     const [showS1, setShowS1] = useState(false)
